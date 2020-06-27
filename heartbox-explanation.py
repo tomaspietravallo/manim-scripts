@@ -1,6 +1,7 @@
 # !/usr/bin/env python
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.getcwd()))
 
 from manimlib.imports import *
@@ -11,6 +12,7 @@ class WriteText(Scene):
         equations = [
             TexMobject(r'l = a \times a'),
             TexMobject(r'l = \sqrt{a^{2} + a^{2}}'),
+            TexMobject(r'l = {{1\over2}\times {1\over2}}\times \sqrt{a^{2} + a^{2}}'),
             TexMobject(r'l = {1\over4}\times \sqrt{a^{2} + a^{2}}'),
             TexMobject(r'l = {1\over4}\times \sqrt{2a^{2}}'),
             TexMobject(r'l = {1\over4}\times \sqrt{2} \times a'),
