@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"python.autoComplete.extraPaths": ["/Users/tomaspietravallo/Documents/manim/"]
+		"python.autoComplete.extraPaths": ["/Users/tomaspietravallo/Documents/manim/", "/Users/tomaspietravallo/Documents/manim/manim-scripts"]
 	}
 }
