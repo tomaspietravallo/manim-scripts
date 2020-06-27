@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "/Users/tomaspietravallo/Documents/manim/manim-scripts"
+		}
+	],
+	"settings": {
+		"python.autoComplete.extraPaths": ["/Users/tomaspietravallo/Documents/manim/"]
+	}
+}
