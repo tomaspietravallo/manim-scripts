@@ -1,7 +1,10 @@
 # !/usr/bin/env python
+import os
+import sys
+sys.path.append(os.path.dirname(os.getcwd()))
+
 from manimlib.imports import *
 from colour import *
-import os
 
 class WriteText(Scene): 
     def construct(self): 
@@ -40,6 +43,6 @@ class WriteText(Scene):
 
 
 
-# python3 -m manim heartbox-explanation.py WriteText -pl --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
+# python3 -m manim manim-scripts/heartbox-explanation.py WriteText -pl --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
 
 # python3 -m manim example_scenes.py SquareToCircle -pl --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
