@@ -20,7 +20,8 @@ class WriteText(Scene):
             TexMobject(r'\text{Area} = {\sqrt{2} \times a \over 4} \times {\sqrt{2} \times a \over 4}')
         ]
         title = TextMobject("Equaciones Problema N°4").move_to(2*UP)
-        self.play(Write(title, run_time=1.5))
+        self.play(Write(title, run_time=2.0))
+        self.wait(0.5)
 
         for index, equation in enumerate(equations):
             if index == 0:
