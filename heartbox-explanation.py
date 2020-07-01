@@ -276,4 +276,4 @@ class ResultPartOne(Scene):
         highlighter = SurroundingRectangle(result, color=BLUE)
         self.play(ShowCreationThenDestruction(highlighter, run_time=1))
         self.wait()
-        
+
