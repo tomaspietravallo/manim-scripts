@@ -138,7 +138,7 @@ class ExplanationPartOne(Scene):
 class Intro(Scene):
     def construct(self):
         title = TextMobject("Problema N°4 - Caja Corazon")
-        subTitle = TextMobject("Constanza Etchebere y Tomas Pietravallo")\
+        subTitle = TextMobject("Constanza Etchebehere y Tomas Pietravallo")\
             .to_edge(DOWN)\
             .scale(0.45)
         self.play(Write(title, run_time=2.0), Write(subTitle, run_time=3))
@@ -263,7 +263,7 @@ class Rearrange(Scene):
         self.play(ReplacementTransform(equations[2], equations[3]))
         self.wait()
 
-class ResultPartOne(Scene):
+class ResultPartOne(Scene): # This scene ended up being really long, it was faster but it seems like a bit of a mess
     def construct(self):
         result = TexMobject(r'l', r'= {\sqrt{2} \times a \over 4}').move_to(2*DOWN)
         line_one_fourth = Line((-0.35, 0, 0), (0.35, 0, 0), color=YELLOW)
@@ -276,4 +276,98 @@ class ResultPartOne(Scene):
         highlighter = SurroundingRectangle(result, color=BLUE)
         self.play(ShowCreationThenDestruction(highlighter, run_time=1))
         self.wait()
+
+class IntroPartTwo(Scene):
+    def construct(self):
+        result = TexMobject(r'l', r'= {\sqrt{2} \times a \over 4}').move_to(0*UP)
+        title_result = TextMobject("¡¡Y llegamos al resultado!!").move_to(UP*1.5)
+        title_question = TextMobject(r"Y si quisieramos sacar el tamaño del papel para\\caja determinada?")
+        title_response = TextMobject(r"Partiremos de la igualdad obtenida anteriormente")
+        title_rearrange = TextMobject(r"Despejamos para (a)").move_to(2*UP)
+        subtitle = TextMobject(r"a", r" = lados de la hoja necesaria")\
+            .scale(0.5) \
+            .next_to(title_rearrange, DOWN)
+        subtitle[0].set_color(YELLOW)
+        self.add(result, title_result)
+        self.play(ApplyMethod(result.move_to, 2*DOWN), ApplyMethod(title_result.move_to, 0*UP), ReplacementTransform(title_result, title_question))
+
+        self.wait(2)
+
+        highlighter = SurroundingRectangle(result, color=BLUE)
+
+        self.play(ReplacementTransform(title_question, title_response))
+        self.play(ShowCreationThenDestruction(highlighter, run_time=0.75))
+
+        self.wait(2.5)
+        recolor = TexMobject(r'l = {\sqrt{2} \times', r'a', r'\over 4}')
+        recolor[0].set_color(WHITE)
+        recolor[1].set_color(YELLOW)
+        self.play(ApplyMethod(result.move_to, 0*UP), ReplacementTransform(title_response, title_rearrange), ReplacementTransform(result, recolor), FadeIn(subtitle))
+        self.wait(2)
+
+        first_step = TexMobject(r'4l = {\sqrt{2} \times', r' a}')
+        first_step[1].set_color(YELLOW)
+        self.play(ReplacementTransform(recolor, first_step))
+
+        equation_pre_rationalize = TexMobject(r'{4l\over{\sqrt{2}}} = ', r'{a}')
+        equation_pre_rationalize[1].set_color(YELLOW)
+
+        self.wait()
+        self.play(ReplacementTransform(first_step, equation_pre_rationalize))
+
+        self.wait(0.5)
+
+        title_rationalize = TextMobject(r"Realizamos la racionalizacion").move_to(2*UP)
+        self.play(ReplacementTransform(title_rearrange, title_rationalize))
+        self.wait(0.5)
+
+        equation_rationalize_first_step = TexMobject(r'{4l\over{\sqrt{2}}} \times {\sqrt{2}\over\sqrt{2}} = ', r"{a}")
+        equation_rationalize_first_step[1].set_color(YELLOW)
+        self.play(ReplacementTransform(equation_pre_rationalize, equation_rationalize_first_step))
+        self.wait(0.5)
+
+        equation_rationalized = TexMobject(r'{4l\times{\sqrt{2}}\over 2} = ', r'{a}')
+        equation_rationalized[1].set_color(YELLOW)
+        self.play(ReplacementTransform(equation_rationalize_first_step, equation_rationalized))
+        self.wait()
+
+        title_simplify = TextMobject(r"Simplificamos 4l con el denominador").move_to(2*UP)
+        self.play(ReplacementTransform(title_rationalize, title_simplify))
+        self.wait()
+
+        last_equation = TexMobject(r'{2l\times{\sqrt{2}}} = ', r'{a}')
+        last_equation[1].set_color(YELLOW)
+
+        highlighter = SurroundingRectangle(result, color=BLUE)
+
+        self.play(ReplacementTransform(equation_rationalized, last_equation))
+        title_end = TextMobject(r"¡¡Y llegamos al resultado!!").move_to(1.5*UP)
+
+        self.play(ReplacementTransform(title_simplify, title_end), FadeOut(subtitle))
+        self.play(ShowCreationThenDestruction(highlighter, run_time=0.75))
+
+        self.wait(2)
+        self.play(FadeOutAndShiftDown(last_equation), FadeOutAndShiftDown(title_end))
+
+        endcard = TextMobject(r"Realizado por alumnos del PAN (2020)") \
+            .move_to(1*UP)\
+            .scale(1.08)
+        endcard_students = TextMobject(r"Constanza Etchebehere y Tomas Pietravallo") \
+            .scale(1) \
+            .next_to(endcard, DOWN)
+        endcard_subject = TextMobject(r"Matematica - Profesor Mauricio Sentenac") \
+            .scale(1.011) \
+            .next_to(endcard_students, DOWN)
+        endcard_github = TextMobject(r"Realizado con Manim - Codigo Abierto bajo Licencia MIT\\github/tomaspietravallo/manim-scripts/heartbox-explanation.py") \
+            .scale(0.3) \
+            .to_edge(DOWN)
+
+        self.play(FadeInFrom(endcard, DOWN))
+        self.play(FadeInFrom(endcard_students, DOWN))
+        self.play(FadeInFrom(endcard_subject, DOWN))
+        self.play(FadeInFrom(endcard_github, DOWN))
+
+        self.wait(3)
+
+        self.play(FadeOut(endcard), FadeOut(endcard_students), FadeOut(endcard_subject), FadeOut(endcard_github))
 
