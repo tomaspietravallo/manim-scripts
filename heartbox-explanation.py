@@ -276,15 +276,4 @@ class ResultPartOne(Scene):
         highlighter = SurroundingRectangle(result, color=BLUE)
         self.play(ShowCreationThenDestruction(highlighter, run_time=1))
         self.wait()
-
-# python3 -m manim manim-scripts/heartbox-explanation.py ExplanationPartOne -pl --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
-
-# python3 -m manim manim-scripts/heartbox-explanation.py Intro -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
-
-# python3 -m manim manim-scripts/heartbox-explanation.py ShowSquare -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
-
-# python3 -m manim manim-scripts/heartbox-explanation.py LineTransform -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
-
-# python3 -m manim manim-scripts/heartbox-explanation.py Rearrange -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
-
-# python3 -m manim manim-scripts/heartbox-explanation.py ResultPartOne -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
+        
