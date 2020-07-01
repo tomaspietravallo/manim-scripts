@@ -99,11 +99,11 @@ class ExplanationPartOne(Scene):
 
             # 1/2 The line twice
             line_three_fourths = Line((-1.06, 0, 0), (1.06, 0, 0), color=YELLOW)
-            line_halve_twice = Line((-0.35, 0, 0), (0.35, 0, 0), color=YELLOW)
+            line_one_fourth = Line((-0.35, 0, 0), (0.35, 0, 0), color=YELLOW)
             self.play(ReplacementTransform(after_hypotenuse, equations[1]))
             self.play(Transform(line, line_three_fourths), ReplacementTransform(square, poly_first_fold))
             self.wait(0.6)
-            self.play(Transform(line, line_halve_twice), ReplacementTransform(poly_first_fold, poly_second_fold), ReplacementTransform(equations[1], equations[2]))
+            self.play(Transform(line, line_one_fourth), ReplacementTransform(poly_first_fold, poly_second_fold), ReplacementTransform(equations[1], equations[2]))
             self.wait(0.5)
             #############
             
@@ -134,7 +134,6 @@ class ExplanationPartOne(Scene):
         draw()
         
         pass
-
 
 class Intro(Scene):
     def construct(self):
@@ -194,7 +193,6 @@ class ShowSquare(Scene):
         
         self.wait()
 
-
 class LineTransform(Scene):
     def construct(self):
         title_reference = TextMobject("Tomamos como referencia la hipotenusa").move_to(2*UP)
@@ -208,8 +206,77 @@ class LineTransform(Scene):
             title_reference,
             square,
             line,
-            after_hypotenuse
+            after_hypotenuse,
         )
+
+        self.wait(0.3)
+
+        self.play(FadeOut(square)) # Remove square
+
+        self.wait(0.3)
+
+        equations_one = TexMobject(r'l', r'= {3\over4}\times \sqrt{a^{2} + a^{2}}').move_to(2*DOWN) #1
+        equations_one[0].set_color(YELLOW)
+        equations_two = TexMobject(r'l', r'= {1\over4}\times \sqrt{a^{2} + a^{2}}').move_to(2*DOWN) #2
+        equations_two[0].set_color(YELLOW)
+        title_process = TextMobject("Expresamos matematicamente lo visto armando la caja").move_to(2*UP)
+        line_three_fourths = Line((-1.06, 0, 0), (1.06, 0, 0), color=YELLOW)
+        line_one_fourth = Line((-0.35, 0, 0), (0.35, 0, 0), color=YELLOW)
+
+        self.play(ReplacementTransform(title_reference, title_process))
+        self.wait(0.5)
+        self.play(ReplacementTransform(after_hypotenuse, equations_one), ReplacementTransform(line, line_three_fourths))
+        
+        self.wait(0.7)
+
+        self.play(ReplacementTransform(equations_one, equations_two), ReplacementTransform(line_three_fourths, line_one_fourth))
+        
+        self.wait()
+
+class Rearrange(Scene):
+    def construct(self):
+        line_one_fourth = Line((-0.35, 0, 0), (0.35, 0, 0), color=YELLOW)
+        title_process = TextMobject("Expresamos matematicamente lo visto armando la caja").move_to(2*UP)
+        title_rearrage = TextMobject("Despejamos la ecuacion").move_to(2*UP)
+
+        equations = [
+            TexMobject(r'l', r'= {1\over4}\times \sqrt{a^{2} + a^{2}}'), #0
+            TexMobject(r'l', r'= {1\over4}\times \sqrt{2a^{2}}'), #1
+            TexMobject(r'l', r'= {1\over4}\times \sqrt{2} \times a'), #2
+            TexMobject(r'l', r'= {\sqrt{2} \times a \over 4}'), #3
+        ]
+
+        for index, equation in enumerate(equations):
+            equations[index] = equation.move_to(2.0*DOWN)
+            equations[index][0].set_color(YELLOW)
+
+        self.add(line_one_fourth, title_process, equations[0])
+
+        self.play(ReplacementTransform(title_process, title_rearrage))
+
+        self.wait(0.5)
+
+        self.play(ReplacementTransform(equations[0], equations[1]))
+        self.wait(0.75)
+        self.play(ReplacementTransform(equations[1], equations[2]))
+        self.wait(0.75)
+        self.play(ReplacementTransform(equations[2], equations[3]))
+        self.wait()
+
+class ResultPartOne(Scene):
+    def construct(self):
+        result = TexMobject(r'l', r'= {\sqrt{2} \times a \over 4}').move_to(2*DOWN)
+        line_one_fourth = Line((-0.35, 0, 0), (0.35, 0, 0), color=YELLOW)
+        title_rearrage = TextMobject("Despejamos la ecuacion").move_to(2*UP)
+        title_result = TextMobject("¡¡Y llegamos al resultado!!").move_to(UP*1.5)
+
+        self.add(result, line_one_fourth)
+        self.play(FadeOut(line_one_fourth), ReplacementTransform(title_rearrage, title_result, run_time=0.75), ApplyMethod(result.move_to, 0*DOWN))
+
+        highlighter = SurroundingRectangle(result, color=BLUE)
+        self.play(ShowCreationThenDestruction(highlighter, run_time=1))
+        self.wait()
+
 # python3 -m manim manim-scripts/heartbox-explanation.py ExplanationPartOne -pl --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
 
 # python3 -m manim manim-scripts/heartbox-explanation.py Intro -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
@@ -217,3 +284,7 @@ class LineTransform(Scene):
 # python3 -m manim manim-scripts/heartbox-explanation.py ShowSquare -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
 
 # python3 -m manim manim-scripts/heartbox-explanation.py LineTransform -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
+
+# python3 -m manim manim-scripts/heartbox-explanation.py Rearrange -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
+
+# python3 -m manim manim-scripts/heartbox-explanation.py ResultPartOne -p --media_dir "/Users/tomaspietravallo/Desktop/quarantine-stuff/manim-output"
